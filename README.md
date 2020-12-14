@@ -47,6 +47,7 @@ OR SHORTER
 ItemStack itemStack = new ItemBuilder(Material.IRON_SWORD).setDisplayName("§eIron Sword").setLores("§fItem Description").setItemFlags(ItemFlag.HIDE_ATTRIBUTES).setColor(Color.RED).toItemStack();
 ```
 
+
 ### InventoryBuilder
 A helper to create inventorys. This can also use ItemBuilders.
 
