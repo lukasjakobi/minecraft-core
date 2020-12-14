@@ -1,6 +1,6 @@
 # Minecraft Core
 
-A Minecraft Spigot Add-On to increase your speed of development. Creating Items, Inventorys, Scoreboards and more the easy way.
+A Minecraft Spigot add-on to increase your speed of development. Create items, inventorys, scoreboards and more the easy way.
 
 # Getting Started
 
@@ -62,7 +62,7 @@ Core.getInstance().registerCommand(new TestCommand());
 
 ### ItemBuilder
 
-A builder to create items with every kind of parameter
+A helper to create items
 
 ```
 ItemBuilder itemBuilder = new ItemBuilder(Material.IRON_SWORD);
@@ -98,7 +98,7 @@ inventoryBuilder.openToPlayer(player); // open inventory to a player
 
 
 ### ActionbarBuilder
-Create Actionbars
+A helper to create Actionbars
 
 ```
 ActionbarBuilder actionbarBuilder = new ActionbarBuilder("§fText");
@@ -108,7 +108,7 @@ actionbarBuilder.showPlayer(player); // send to player
 
 
 ### ScoreboardBuilder
-Create Scoreboards (supports updating values)
+A helper to create Scoreboards (supports dynamic values)
 
 ```
 ScoreboardBuilder scoreboardBuilder = new ScoreboardBuilder(player, "title");
