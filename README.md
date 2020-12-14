@@ -25,6 +25,12 @@ A Minecraft Spigot add-on to increase your speed of development. Create items, i
 
 ## Documentation
 
+### Events
+
+You want to register a whole package worth of events at once? Then this is what you need:
+```
+Core.getInstance().registerListener(YOUR_MAIN.getClass(), "path.to.package");
+```
 ### Commands
 
 Creating custom commands was never easier. Set permissions and command aliases without registering them in the plugin.yml, fully automatic and lightning-fast
