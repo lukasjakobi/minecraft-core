@@ -25,6 +25,35 @@ A Minecraft Spigot Add-On to increase your speed of development. Creating Items,
 
 ## Documentation
 
+### Commands
+
+Creating custom commands was never easier. Set permissions and command aliases without registering them in the plugin.yml, fully automatic and lightning-fast
+
+```
+public class TestCommand implements CorePlayerCommand {
+
+    @Override
+    public void onPlayerCommand(Player player, String[] args, String label) {
+        // command execution
+    }
+
+    @Override
+    public List<String> getCommands() {
+        return Arrays.asList("command", "command2", "command3");
+    }
+
+    @Override
+    public String neededPermission() {
+        return "permission.name";
+    }
+
+    @Override
+    public String getDescription() {
+        return "custom description";
+    }
+}
+```
+
 ### ItemBuilder
 
 A builder to create items with every kind of parameter
