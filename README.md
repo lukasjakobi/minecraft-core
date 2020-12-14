@@ -54,6 +54,12 @@ public class TestCommand implements CorePlayerCommand {
 }
 ```
 
+Registering the command
+
+```
+Core.getInstance().registerCommand(new TestCommand());
+```
+
 ### ItemBuilder
 
 A builder to create items with every kind of parameter
