@@ -60,3 +60,30 @@ inventoryBuilder.disableInteraction(true); // cancel inventory click event
 
 inventoryBuilder.openToPlayer(player); // open inventory to a player
 ```
+
+
+### ActionbarBuilder
+Create Actionbars
+
+```
+ActionbarBuilder actionbarBuilder = new ActionbarBuilder("§fText");
+actionbarBuilder.showTime(5); // time to show in seconds
+actionbarBuilder.showPlayer(player); // send to player
+```
+
+
+### ScoreboardBuilder
+Create Scoreboards (supports updating values)
+
+```
+ScoreboardBuilder scoreboardBuilder = new ScoreboardBuilder("§fTitle");
+scoreboardBuilder.addEmptyLine(); // empty line
+scoreboardBuilder.addLine("§fCoins:"); // add line
+scoreboardBuilder.addUpdateLine("coins", "§f%s ", "§fCoins"); // add updating line
+scoreboardBuilder.showAllPlayers(); // send to players
+```
+
+Updating Values
+```
+scoreboardBuilder.update("coins", 2000);
+```
