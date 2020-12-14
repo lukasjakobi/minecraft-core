@@ -105,14 +105,14 @@ actionbarBuilder.showPlayer(player); // send to player
 Create Scoreboards (supports updating values)
 
 ```
-ScoreboardBuilder scoreboardBuilder = new ScoreboardBuilder("§fTitle");
-scoreboardBuilder.addEmptyLine(); // empty line
-scoreboardBuilder.addLine("§fCoins:"); // add line
-scoreboardBuilder.addUpdateLine("coins", "§f%s ", "§fCoins"); // add updating line
-scoreboardBuilder.showAllPlayers(); // send to players
+ScoreboardBuilder scoreboardBuilder = new ScoreboardBuilder(player, "title");
+scoreboardBuilder.addEmptyLine();
+scoreboardBuilder.addLine("line");
+scoreboardBuilder.addUpdateRow("coins", "§f%s ", "Coins");
 ```
 
 Updating Values
 ```
-scoreboardBuilder.update("coins", 2000);
+ScoreboardBuilder.getBuilder(player).updateRow("coins", 2000, null);
+ScoreboardBuilder.getBuilder(player).updateTitle("new title");
 ```
