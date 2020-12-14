@@ -1,14 +1,11 @@
 package io.jakobi.core.inventory;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.potion.Potion;
 
 import java.util.*;
 
@@ -16,8 +13,8 @@ import java.util.*;
  * Item Helper
  *
  * @author Lukas Jakobi <lukas@jakobi.io>
+ * @copyright https://github.com/lukasjakobi/minecraft-core/blob/master/LICENSE
  * @since 11.12.2020
- * @copyright https://github.com/lukasjakobi/minecraft-core/Licence.md
  */
 public class ItemBuilder {
 
@@ -28,8 +25,7 @@ public class ItemBuilder {
     private List<String> lores = new ArrayList<>();
     private final HashMap<Enchantment, Integer> enchantments = new HashMap<>();
     private Damageable damageable;
-    private Potion potion;
-    private Color color;
+    private boolean unbreakable;
 
     public ItemBuilder(Material material) {
         this.material = material;
@@ -69,16 +65,6 @@ public class ItemBuilder {
         return this;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public ItemBuilder setColor(Color color) {
-        this.color = color;
-
-        return this;
-    }
-
     public Damageable getDamageable() {
         return damageable;
     }
@@ -109,12 +95,18 @@ public class ItemBuilder {
         return this;
     }
 
-    public Potion getPotion() {
-        return potion;
+    public ItemBuilder addItemFlag(ItemFlag itemFlag) {
+        this.itemFlags.add(itemFlag);
+
+        return this;
     }
 
-    public ItemBuilder setPotion(Potion potion) {
-        this.potion = potion;
+    public boolean isUnbreakable() {
+        return unbreakable;
+    }
+
+    public ItemBuilder setUnbreakable(boolean unbreakable) {
+        this.unbreakable = unbreakable;
 
         return this;
     }
@@ -135,15 +127,7 @@ public class ItemBuilder {
         }
 
         if (this.damageable != null) {
-            ((Damageable)itemMeta).setDamage(this.damageable.getDamage());
-        }
-
-        if (this.potion != null && this.material == Material.POTION) {
-            this.potion.apply(itemStack);
-        }
-
-        if (this.color != null && itemMeta instanceof LeatherArmorMeta) {
-            ((LeatherArmorMeta)itemMeta).setColor(this.color);
+            ((Damageable) itemMeta).setDamage(this.damageable.getDamage());
         }
 
         if (this.itemFlags.size() > 0) {
@@ -154,6 +138,10 @@ public class ItemBuilder {
             for (Enchantment enchantment : this.enchantments.keySet()) {
                 itemMeta.addEnchant(enchantment, this.enchantments.get(enchantment), true);
             }
+        }
+
+        if (this.unbreakable) {
+            itemMeta.spigot().setUnbreakable(true);
         }
 
         if (this.lores.size() > 0) {

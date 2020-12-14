@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Lukas Jakobi <lukas@jakobi.io>
  * @since 11.12.2020
- * @copyright https://github.com/lukasjakobi/minecraft-core/Licence.md
+ * @copyright https://github.com/lukasjakobi/minecraft-core/blob/master/LICENSE
  */
 public class BossBar {
 

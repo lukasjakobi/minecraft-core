@@ -4,7 +4,6 @@ import io.jakobi.core.Core;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.HashMap;
  *
  * @author Lukas Jakobi <lukas@jakobi.io>
  * @since 14.12.2020
- * @copyright https://github.com/lukasjakobi/minecraft-core/Licence.md
+ * @copyright https://github.com/lukasjakobi/minecraft-core/blob/master/LICENSE
  */
 public class InventoryBuilder {
 
@@ -24,12 +23,12 @@ public class InventoryBuilder {
     private final HashMap<Integer, ItemBuilder> items = new HashMap<>();
     private Runnable closeRunnable;
     private final Inventory inventory;
-    private final String title;
+    private String title;
     private boolean disable;
 
     public InventoryBuilder(String title, int size) {
         this.title = title;
-        this.inventory = Bukkit.createInventory((InventoryHolder) null, size, title);
+        this.inventory = Bukkit.createInventory(null, size, title);
     }
 
     public InventoryBuilder withBackground(ItemBuilder itemBuilder) {
@@ -73,6 +72,16 @@ public class InventoryBuilder {
 
     public HashMap<Integer, ItemBuilder> getItems() {
         return this.items;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public InventoryBuilder setTitle(String title) {
+        this.title = title;
+
+        return this;
     }
 
     public void openToPlayer(Player player) {

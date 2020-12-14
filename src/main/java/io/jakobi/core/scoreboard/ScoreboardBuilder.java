@@ -1,90 +1,148 @@
 package io.jakobi.core.scoreboard;
 
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Scoreboard Helper
  *
  * @author Lukas Jakobi <lukas@jakobi.io>
+ * @copyright https://github.com/lukasjakobi/minecraft-core/blob/master/LICENSE
  * @since 11.12.2020
- * @copyright https://github.com/lukasjakobi/minecraft-core/Licence.md
  */
 public class ScoreboardBuilder {
 
+    public static HashMap<Player, ScoreboardBuilder> scoreboards = new HashMap<>();
+    public static boolean disableAutomaticJoinScoreboard = false;
+
+    private final Scoreboard scoreboard;
+    private final Player player;
+    private final HashMap<String, String> updatePrefixes = new HashMap<>();
+    private final HashMap<String, String> updateSuffixes = new HashMap<>();
+
+    private Objective objective;
     private String title;
-    private final List<String> lines;
+    private int score = 16;
 
-    /**
-     * Create new Scoreboard
-     * @param title Scoreboard title
-     */
-    public ScoreboardBuilder(String title) {
+    public ScoreboardBuilder(Player player, String title) {
+        this.player = player;
         this.title = title;
-        this.lines = new ArrayList<>();
+        this.scoreboard = player.getScoreboard();
+        this.objective = scoreboard.getObjective("aaa");
+
+        if (this.objective == null) {
+            objective = scoreboard.registerNewObjective("aaa", "bbb");
+        }
+
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        objective.setDisplayName(title);
     }
 
-    /**
-     * Updates the title of the scoreboard. Changes will not be updated automatically
-     *
-     * @param title Scoreboard title
-     * @return Scoreboard Instance
-     */
-    public ScoreboardBuilder setTitle(String title) {
-        this.title = title;
+    public ScoreboardBuilder disabledSideboard() {
+        if (this.objective != null) {
+            this.objective.unregister();
+        }
 
         return this;
     }
 
-    /**
-     * Adds a clear line to the scoreboard
-     *
-     * @return Scoreboard Instance
-     */
+    public ScoreboardBuilder resetScores() {
+        for (Objective objective : scoreboard.getObjectives()) {
+            objective.unregister();
+        }
+        objective = scoreboard.registerNewObjective("aaa", "bbb");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        objective.setDisplayName(this.title);
+
+        return this;
+    }
+
     public ScoreboardBuilder addEmptyLine() {
-        this.lines.add("§r");
+        objective.getScore(getRandomEntry(8)).setScore(this.score);
+        this.score--;
 
         return this;
     }
 
-    /**
-     * Adds a static line to the scoreboard. If you want the line to be updatable, use addUpdateLine()
-     *
-     * @return Scoreboard Instance
-     */
     public ScoreboardBuilder addLine(String line) {
-        this.lines.add(line);
+        objective.getScore(line).setScore(this.score);
+        this.score--;
 
         return this;
     }
 
-    /**
-     * Adds a updating line to the scoreboard. Use %s to represent updating values
-     *
-     * @return Scoreboard Instance
-     */
-    public ScoreboardBuilder addUpdateLine(String key, String prefix, String suffix) {
-        //this.lines.add(line);
+    public ScoreboardBuilder addUpdateRow(String key, String prefix, String suffix) {
+        String entry = getRandomEntry(3);
+        Team team = scoreboard.getTeam(key);
+
+        if (team == null) {
+            team = scoreboard.registerNewTeam(key);
+        }
+
+        updatePrefixes.put(key, prefix);
+        updateSuffixes.put(key, suffix);
+
+        team.setPrefix(prefix);
+        team.setSuffix(suffix);
+        team.addEntry(entry);
+        addLine(entry);
 
         return this;
     }
 
-    /**
-     * Send the scoreboard to a specific player
-     *
-     * @param player The Player
-     */
-    public void showPlayer(Player player) {
+    public ScoreboardBuilder updateRow(String key, String prefixValue, String suffixValue) {
+        Team team = scoreboard.getTeam(key);
 
+        if (team != null) {
+            String prefix = updatePrefixes.get(key);
+            String suffix = updateSuffixes.get(key);
+
+            if (prefix != null) {
+                team.setPrefix(String.format(prefix, prefixValue));
+            }
+
+            if (suffix != null) {
+                team.setSuffix(String.format(suffix, suffixValue));
+            }
+        }
+
+        return this;
     }
 
+    public ScoreboardBuilder updateTitle(String string) {
+        this.title = string;
+        this.objective.setDisplayName(string);
 
-    /**
-     * Send the scoreboard to all players
-     */
-    public void showAllPlayers() {
+        return this;
+    }
 
+    private String getRandomEntry(int length) {
+        StringBuilder entry = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int random = new Random().nextInt(9);
+            entry.append("§").append(random);
+        }
+
+        return entry.toString();
+    }
+
+    public Scoreboard getScoreboard() {
+        return scoreboard;
+    }
+
+    public void sendPlayer() {
+        player.setScoreboard(scoreboard);
+        ScoreboardBuilder.scoreboards.put(player, this);
+    }
+
+    public static ScoreboardBuilder getBuilder(Player player) {
+        return ScoreboardBuilder.scoreboards.get(player);
     }
 }
