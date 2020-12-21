@@ -10,7 +10,7 @@ A Minecraft Spigot add-on to increase your speed of development. Create items, i
         <repository>
             <id>minecraft-core</id>
             <name>Minecraft Core</name>
-            <url>https://cdn.jakobi.io/maven/minecraft-core/snapshots</url>
+            <url>https://maven.jakobi.io/minecraft-core/snapshots</url>
         </repository>
 ```
 
