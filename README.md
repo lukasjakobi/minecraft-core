@@ -2,6 +2,12 @@
 
 A Minecraft Spigot add-on to increase your speed of development. Create items, inventorys, scoreboards and more the easy way.
 
+## Credits
+Special Thanks to Christian Tschörner, who both gave me this idea and contributed valuable code! Thanks a lot!
+
+https://github.com/christiantschoerner (@christiantschoerner)
+
+
 # Getting Started
 
 ## Maven
