@@ -97,7 +97,7 @@ A helper to create inventorys. This can also use ItemBuilders.
 InventoryBuilder inventoryBuilder = new InventoryBuilder("Custom Inventory", 9 * 3);
 
 inventoryBuilder.withBackground(itemBuilder); // set all slots to a specific item
-inventoryBuilder.addItem(0, itemBuilder); // add an item to the inventory
+inventoryBuilder.setItem(0, itemBuilder); // add an item to the inventory
 inventoryBuilder.disableInteraction(true); // cancel inventory click event
 
 inventoryBuilder.openToPlayer(player); // open inventory to a player
