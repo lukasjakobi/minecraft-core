@@ -114,6 +114,16 @@ actionbarBuilder.showPlayer(player); // send to player
 ```
 
 
+### BossbarBuilder
+A helper to create Actionbars
+
+```
+BossbarBuilder bossbarBuilder = new BossbarBuilder("§fText", BarColor.WHITE, BarStyle.SOLID, BarFlag.CREATE_FOG);
+bossbarBuilder.setProgress(0.5); // progress from 0 to 1 (0.5 ==> 50%)
+bossbarBuilder.sendBossBar(); // send to players
+```
+
+
 ### ScoreboardBuilder
 A helper to create Scoreboards (supports dynamic values)
 
