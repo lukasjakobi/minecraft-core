@@ -29,7 +29,10 @@ public class Core extends JavaPlugin {
         super.onEnable();
         instance = this;
 
+        // events
         this.registerListener(this.getClass(), "io.jakobi.core.listener");
+        this.getServer().getPluginManager().registerEvents(new PlayerCommandPreProcessListener(), this);
+
         Logger.success("Successfully initialized 'minecraft-core'");
     }
 

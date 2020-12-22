@@ -1,0 +1,5 @@
+name: minecraft-core
+author: lukasjakobi
+version: 1.0.0
+main: io.jakobi.core.Core
+api-version: "1.13"

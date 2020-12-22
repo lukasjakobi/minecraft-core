@@ -48,7 +48,7 @@ public class InventoryBuilder {
         return this.disable;
     }
 
-    public InventoryBuilder addItem(int position, ItemBuilder itemBuilder) {
+    public InventoryBuilder setItem(int position, ItemBuilder itemBuilder) {
         ItemStack itemStack = itemBuilder.toItemStack();
         this.items.put(position, itemBuilder);
         this.inventory.setItem(position, itemStack);
@@ -56,7 +56,7 @@ public class InventoryBuilder {
         return this;
     }
 
-    public InventoryBuilder addItem(int position, ItemStack itemStack) {
+    public InventoryBuilder setItem(int position, ItemStack itemStack) {
         ItemBuilder itemBuilder = new ItemBuilder(itemStack.getType());
         this.items.put(position, itemBuilder);
         this.inventory.setItem(position, itemStack);
