@@ -2,6 +2,12 @@
 
 A Minecraft Spigot add-on to increase your speed of development. Create items, inventorys, scoreboards and more the easy way.
 
+## Credits
+Special Thanks to Christian Tschörner, who both gave me this idea and contributed valuable code! Thanks a lot!
+
+https://github.com/christiantschoerner (@christiantschoerner)
+
+
 # Getting Started
 
 ## Maven
@@ -10,7 +16,7 @@ A Minecraft Spigot add-on to increase your speed of development. Create items, i
         <repository>
             <id>minecraft-core</id>
             <name>Minecraft Core</name>
-            <url>https://cdn.jakobi.io/maven/minecraft-core/snapshots</url>
+            <url>https://maven.jakobi.io/minecraft-core/snapshots</url>
         </repository>
 ```
 
@@ -25,6 +31,12 @@ A Minecraft Spigot add-on to increase your speed of development. Create items, i
 
 ## Documentation
 
+### Events
+
+You want to register a whole package worth of events at once? Then this is what you need:
+```
+Core.getInstance().registerListener(YOUR_MAIN.getClass(), "path.to.package");
+```
 ### Commands
 
 Creating custom commands was never easier. Set permissions and command aliases without registering them in the plugin.yml, fully automatic and lightning-fast
@@ -91,7 +103,7 @@ A helper to create inventorys. This can also use ItemBuilders.
 InventoryBuilder inventoryBuilder = new InventoryBuilder("Custom Inventory", 9 * 3);
 
 inventoryBuilder.withBackground(itemBuilder); // set all slots to a specific item
-inventoryBuilder.addItem(0, itemBuilder); // add an item to the inventory
+inventoryBuilder.setItem(0, itemBuilder); // add an item to the inventory
 inventoryBuilder.disableInteraction(true); // cancel inventory click event
 
 inventoryBuilder.openToPlayer(player); // open inventory to a player
@@ -105,6 +117,16 @@ A helper to create Actionbars
 ActionbarBuilder actionbarBuilder = new ActionbarBuilder("§fText");
 actionbarBuilder.showTime(5); // time to show in seconds
 actionbarBuilder.showPlayer(player); // send to player
+```
+
+
+### BossbarBuilder
+A helper to create Actionbars
+
+```
+BossbarBuilder bossbarBuilder = new BossbarBuilder("§fText", BarColor.WHITE, BarStyle.SOLID, BarFlag.CREATE_FOG);
+bossbarBuilder.setProgress(0.5); // progress from 0 to 1 (0.5 ==> 50%)
+bossbarBuilder.sendBossBar(); // send to players
 ```
 
 
