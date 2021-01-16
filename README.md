@@ -10,7 +10,13 @@ https://github.com/christiantschoerner (@christiantschoerner)
 
 # Getting Started
 
-## Maven
+## Using the JAR
+
+1. Download the JAR here: https://cdn.jakobi.io/wp-content/2021/1/minecraft-core-latest.jar
+2. Open your Projects Libraries (File -> Project Structure -> Libraries) and click the '+' to add the JAR to your Project Libraries
+3. Start coding!
+
+## Maven (Not Working)
 
 ```
         <repository>
