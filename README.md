@@ -12,7 +12,7 @@ https://github.com/christiantschoerner (@christiantschoerner)
 
 ## Using the JAR
 
-1. Download the JAR here: https://cdn.jakobi.io/wp-content/2021/1/minecraft-core-latest.jar
+1. Download the JAR here: https://l.jakobi.io/apokvkro
 2. Open your Projects Libraries (File -> Project Structure -> Libraries) and click the '+' to add the JAR to your Project Libraries
 3. Start coding!
 
