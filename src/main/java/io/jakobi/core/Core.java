@@ -1,7 +1,8 @@
 package io.jakobi.core;
 
-import io.jakobi.core.command.CorePlayerCommand;
-import io.jakobi.core.command.PlayerCommandPreProcessListener;
+import io.jakobi.core.command.CommandPreProcessListener;
+import io.jakobi.core.command.CoreCommand;
+import io.jakobi.core.database.DatabaseQueryBuilder;
 import io.jakobi.core.log.Logger;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.common.reflect.ClassPath;
@@ -29,9 +30,16 @@ public class Core extends JavaPlugin {
         super.onEnable();
         instance = this;
 
+        DatabaseQueryBuilder queryBuilder = new DatabaseQueryBuilder();
+        System.out.println(
+                queryBuilder
+                        .select("*").from("Football").where("id = %s", "1")
+                        .toString()
+        );
+
         // events
         this.registerListener(this.getClass(), "io.jakobi.core.listener");
-        this.getServer().getPluginManager().registerEvents(new PlayerCommandPreProcessListener(), this);
+        this.getServer().getPluginManager().registerEvents(new CommandPreProcessListener(), this);
 
         Logger.success("Successfully initialized 'minecraft-core'");
     }
@@ -65,7 +73,7 @@ public class Core extends JavaPlugin {
         }
     }
 
-    public void registerCommand(CorePlayerCommand command) {
-        PlayerCommandPreProcessListener.commands.add(command);
+    public void registerCommand(CoreCommand command) {
+        CommandPreProcessListener.commands.add(command);
     }
 }
